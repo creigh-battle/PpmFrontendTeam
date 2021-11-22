@@ -22,6 +22,7 @@ export const createNewUser = (newUser, history) => async (dispatch) => {
 export const login = (LoginRequest) => async (dispatch) => {
   try {
     // post => Login Request
+    console.log("im trying");
     const res = await axios.post("/api/users/login", LoginRequest);
 
     // extract token from res.data
@@ -42,6 +43,7 @@ export const login = (LoginRequest) => async (dispatch) => {
       payload: decoded,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: GET_ERRORS,
       payload: error.response.data,
