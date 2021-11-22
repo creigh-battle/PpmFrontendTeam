@@ -23,7 +23,10 @@ export const login = (LoginRequest) => async (dispatch) => {
   try {
     // post => Login Request
     console.log("im trying");
-    const res = await axios.post("/api/users/login", LoginRequest);
+    const res = await axios.post(
+      "https://still-springs-98597.herokuapp.com/api/users/login",
+      LoginRequest
+    );
 
     // extract token from res.data
     const { token } = res.data;
@@ -43,7 +46,7 @@ export const login = (LoginRequest) => async (dispatch) => {
       payload: decoded,
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     dispatch({
       type: GET_ERRORS,
       payload: error.response.data,

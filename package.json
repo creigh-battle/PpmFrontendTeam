@@ -25,7 +25,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://still-springs-98597.herokuapp.com/",
   "eslintConfig": {
     "extends": [
       "react-app",

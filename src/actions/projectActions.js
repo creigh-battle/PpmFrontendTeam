@@ -18,7 +18,9 @@ export const createProject = (project, history) => async (dispatch) => {
 };
 
 export const getProjects = () => async (dispatch) => {
-  const res = await axios.get("/api/project/all");
+  const res = await axios.get(
+    "https://still-springs-98597.herokuapp.com/api/project/all"
+  );
   dispatch({
     type: GET_PROJECTS,
     payload: res.data,
