@@ -9,7 +9,10 @@ import {
 export const addProjectTask =
   (backlog_id, project_task, history) => async (dispatch) => {
     try {
-      await axios.post(`/api/backlog/${backlog_id}`, project_task);
+      await axios.post(
+        `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}`,
+        project_task
+      );
       history.push(`/projectBoard/${backlog_id}`);
       dispatch({
         type: GET_ERRORS,
@@ -25,7 +28,9 @@ export const addProjectTask =
 
 export const getBacklog = (backlog_id) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/backlog/${backlog_id}`);
+    const res = await axios.get(
+      `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}`
+    );
     console.log(res);
     dispatch({
       type: GET_BACKLOG,
@@ -42,7 +47,9 @@ export const getBacklog = (backlog_id) => async (dispatch) => {
 export const getProjectTask =
   (backlog_id, pt_id, history) => async (dispatch) => {
     try {
-      const res = await axios.get(`/api/backlog/${backlog_id}/${pt_id}`);
+      const res = await axios.get(
+        `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}/${pt_id}`
+      );
       dispatch({
         type: GET_PROJECT_TASK,
         payload: res.data,
@@ -55,7 +62,10 @@ export const getProjectTask =
 export const updateProjectTask =
   (backlog_id, pt_id, project_task, history) => async (dispatch) => {
     try {
-      await axios.patch(`/api/backlog/${backlog_id}/${pt_id}`, project_task);
+      await axios.patch(
+        `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}/${pt_id}`,
+        project_task
+      );
       history.push(`/projectBoard/${backlog_id}`);
 
       dispatch({
@@ -76,7 +86,9 @@ export const deleteProjectTask = (backlog_id, pt_id) => async (dispatch) => {
       `You are deleting project task ${pt_id}, this action cannot be undone`
     )
   ) {
-    await axios.delete(`/api/backlog/${backlog_id}/${pt_id}`);
+    await axios.delete(
+      `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}/${pt_id}`
+    );
     dispatch({
       type: DELETE_PROJECT_TASK,
       payload: pt_id,

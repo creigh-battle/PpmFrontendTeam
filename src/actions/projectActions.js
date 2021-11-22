@@ -3,7 +3,10 @@ import { GET_ERRORS, GET_PROJECT, GET_PROJECTS, DELETE_PROJECT } from "./types";
 
 export const createProject = (project, history) => async (dispatch) => {
   try {
-    await axios.post("/api/project", project);
+    await axios.post(
+      "https://still-springs-98597.herokuapp.com/api/project",
+      project
+    );
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,
@@ -29,7 +32,9 @@ export const getProjects = () => async (dispatch) => {
 
 export const getProject = (id, history) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/project/${id}`);
+    const res = await axios.get(
+      `https://still-springs-98597.herokuapp.com/api/project/${id}`
+    );
     dispatch({
       type: GET_PROJECT,
       payload: res.data,
@@ -45,7 +50,9 @@ export const deleteProject = (id) => async (dispatch) => {
       "Are you sure? This will delete the project and all the data related to it"
     )
   ) {
-    await axios.delete(`/api/project/${id}`);
+    await axios.delete(
+      `https://still-springs-98597.herokuapp.com/api/project/${id}`
+    );
     dispatch({
       type: DELETE_PROJECT,
       payload: id,
