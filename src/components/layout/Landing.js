@@ -10,7 +10,7 @@ function Landing(props) {
   }, []);
 
   return (
-    <div className="landing">
+    <div style={{ background: "#f9f9f9", height: "93vh" }}>
       <div className="light-overlay landing-inner text-dark">
         <div className="container">
           <div className="row">
