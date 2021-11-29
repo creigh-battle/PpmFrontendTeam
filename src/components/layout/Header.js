@@ -16,6 +16,7 @@ import {
   lightText,
   darkHighlightColor,
   lightHighlightColor,
+  navyBlue,
 } from "../../constants/colors";
 
 const Container = styled.div({
@@ -176,7 +177,7 @@ function Header(props) {
       <SidebarTitleContainer
         style={{
           color: theme == "dark" ? darkHighlightColor : lightHighlightColor,
-          background: theme == "dark" ? darkContent : light,
+          background: theme == "dark" ? navyBlue : light,
         }}
       >
         <h3 style={{ textAlign: "center" }}> PPMT</h3>
@@ -226,7 +227,7 @@ function Header(props) {
         <SidebarContainer
           style={{
             color: theme == "dark" ? lightText : darkText,
-            background: theme == "dark" ? darkContent : light,
+            background: theme == "dark" ? navyBlue : light,
             borderRight:
               theme == "dark"
                 ? "1px solid rgba(265,265,265,.5)"
@@ -241,7 +242,7 @@ function Header(props) {
         <NavbarContainer
           style={{
             color: theme == "dark" ? lightText : darkText,
-            background: theme == "dark" ? darkContent : lightContent,
+            background: theme == "dark" ? navyBlue : lightContent,
             boxShadow:
               theme == "dark"
                 ? "0px 3px 10px rgb(187 134 252 / .2)"

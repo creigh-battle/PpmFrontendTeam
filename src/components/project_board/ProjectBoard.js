@@ -3,10 +3,24 @@ import { Link } from "react-router-dom";
 import Backlog from "./Backlog";
 import { connect } from "react-redux";
 import { getBacklog } from "../../actions/backlogActions";
+import styled from "styled-components";
+import {
+  dark,
+  light,
+  darkContent,
+  lightContent,
+  darkHighlightColor,
+  navyBlue,
+} from "../../constants/colors";
 
 function ProjectBoard(props) {
   const { id } = props.match.params;
   const [errors, setErrors] = useState({});
+  const [theme, setTheme] = useState("");
+
+  useEffect(() => {
+    setTheme(props.userInterface.color);
+  }, [props.userInterface]);
 
   useEffect(() => {
     setErrors(props.errors);
@@ -48,7 +62,13 @@ function ProjectBoard(props) {
   BoardContent = boardAlgo(errors, props.backlog.project_tasks);
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        minHeight: "90vh",
+        background: theme == "dark" ? dark : lightContent,
+      }}
+    >
       <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
         <i className="fas fa-plus-circle"> Create Project Task</i>
       </Link>
@@ -63,6 +83,7 @@ function ProjectBoard(props) {
 const mapStateToProps = (state) => ({
   backlog: state.backlog,
   errors: state.errors,
+  userInterface: state.userInterface,
 });
 
 export default connect(mapStateToProps, { getBacklog })(ProjectBoard);

@@ -5,7 +5,10 @@ import jwt_decode from "jwt-decode";
 
 export const createNewUser = (newUser, history) => async (dispatch) => {
   try {
-    await axios.post("http://52.149.156.107:8383/api/users/register", newUser);
+    await axios.post(
+      "https://still-springs-98597.herokuapp.com/api/users/register",
+      newUser
+    );
     history.push("/login");
     dispatch({
       type: GET_ERRORS,
@@ -24,7 +27,7 @@ export const login = (LoginRequest) => async (dispatch) => {
     // post => Login Request
     console.log("im trying");
     const res = await axios.post(
-      "http://52.149.156.107:8383/api/users/login",
+      "https://still-springs-98597.herokuapp.com/api/users/login",
       LoginRequest
     );
 

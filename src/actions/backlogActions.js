@@ -10,7 +10,7 @@ export const addProjectTask =
   (backlog_id, project_task, history) => async (dispatch) => {
     try {
       await axios.post(
-        `http://52.149.156.107:8383/api/backlog/${backlog_id}`,
+        `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}`,
         project_task
       );
       history.push(`/projectBoard/${backlog_id}`);
@@ -29,7 +29,7 @@ export const addProjectTask =
 export const getBacklog = (backlog_id) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://52.149.156.107:8383/api/backlog/${backlog_id}`
+      `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}`
     );
     console.log(res);
     dispatch({
@@ -48,7 +48,7 @@ export const getProjectTask =
   (backlog_id, pt_id, history) => async (dispatch) => {
     try {
       const res = await axios.get(
-        `http://52.149.156.107:8383/api/backlog/${backlog_id}/${pt_id}`
+        `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}/${pt_id}`
       );
       dispatch({
         type: GET_PROJECT_TASK,
@@ -63,7 +63,7 @@ export const updateProjectTask =
   (backlog_id, pt_id, project_task, history) => async (dispatch) => {
     try {
       await axios.patch(
-        `http://52.149.156.107:8383/api/backlog/${backlog_id}/${pt_id}`,
+        `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}/${pt_id}`,
         project_task
       );
       history.push(`/projectBoard/${backlog_id}`);
@@ -87,7 +87,7 @@ export const deleteProjectTask = (backlog_id, pt_id) => async (dispatch) => {
     )
   ) {
     await axios.delete(
-      `http://52.149.156.107:8383/api/backlog/${backlog_id}/${pt_id}`
+      `https://still-springs-98597.herokuapp.com/api/backlog/${backlog_id}/${pt_id}`
     );
     dispatch({
       type: DELETE_PROJECT_TASK,

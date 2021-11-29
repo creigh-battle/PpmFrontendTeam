@@ -3,9 +3,19 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { addProjectTask } from "../../../actions/backlogActions";
+import styled from "styled-components";
+import {
+  dark,
+  light,
+  darkContent,
+  lightContent,
+  darkHighlightColor,
+  navyBlue,
+} from "../../../constants/colors";
 
 function AddProjectTask(props) {
   const { id } = props.match.params;
+  const [theme, setTheme] = useState("");
 
   const [state, setState] = useState({
     summary: "",
@@ -28,6 +38,10 @@ function AddProjectTask(props) {
     }
   }, [props.errors]);
 
+  useEffect(() => {
+    setTheme(props.userInterface.color);
+  }, [props.userInterface]);
+
   const onChange = (e) => {
     const { name, value } = e.target;
 
@@ -36,6 +50,9 @@ function AddProjectTask(props) {
       [name]: value,
     }));
   };
+  useEffect(() => {
+    setTheme(props.userInterface.color);
+  }, [props.userInterface]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -54,18 +71,42 @@ function AddProjectTask(props) {
   };
 
   return (
-    <div className="add-PBI">
+    <div
+      className="add-PBI"
+      style={{
+        minHeight: "90vh",
+        background: theme == "dark" ? dark : lightContent,
+      }}
+    >
       <div className="container">
         <div className="row">
           <div className="col-md-8 m-auto">
             <Link to={`/projectBoard/${id}`} className="btn btn-light">
               Back to Project Board
             </Link>
-            <h4 className="display-4 text-center">Add Project Task</h4>
-            <p className="lead text-center">Project Name + Project Code</p>
+            <h4
+              className="display-4 text-center"
+              style={{
+                color: theme == "dark" ? light : dark,
+              }}
+            >
+              Add Project Task
+            </h4>
+            <p
+              className="lead text-center"
+              style={{
+                color: theme == "dark" ? light : dark,
+              }}
+            >
+              Project Name + Project Code
+            </p>
             <form onSubmit={onSubmit}>
               <div className="form-group">
                 <input
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                    backgroundColor: theme == "dark" ? navyBlue : light,
+                  }}
                   type="text"
                   className={classnames("form-control form-control-lg", {
                     "is-invalid": errors.summary,
@@ -81,6 +122,10 @@ function AddProjectTask(props) {
               </div>
               <div className="form-group">
                 <textarea
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                    backgroundColor: theme == "dark" ? navyBlue : light,
+                  }}
                   className="form-control form-control-lg"
                   placeholder="Acceptance Criteria"
                   name="acceptanceCriteria"
@@ -88,9 +133,19 @@ function AddProjectTask(props) {
                   onChange={onChange}
                 ></textarea>
               </div>
-              <h6>Due Date</h6>
+              <h6
+                style={{
+                  color: theme == "dark" ? light : dark,
+                }}
+              >
+                Due Date
+              </h6>
               <div className="form-group">
                 <input
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                    backgroundColor: theme == "dark" ? navyBlue : light,
+                  }}
                   type="date"
                   className="form-control form-control-lg"
                   name="dueDate"
@@ -100,6 +155,10 @@ function AddProjectTask(props) {
               </div>
               <div className="form-group">
                 <select
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                    backgroundColor: theme == "dark" ? navyBlue : light,
+                  }}
                   className="form-control form-control-lg"
                   name="priority"
                   value={state.priority}
@@ -114,6 +173,10 @@ function AddProjectTask(props) {
 
               <div className="form-group">
                 <select
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                    backgroundColor: theme == "dark" ? navyBlue : light,
+                  }}
                   className="form-control form-control-lg"
                   name="status"
                   value={state.status}
@@ -126,7 +189,14 @@ function AddProjectTask(props) {
                 </select>
               </div>
 
-              <input type="submit" className="btn btn-primary btn-block mt-4" />
+              <input
+                type="submit"
+                className="btn btn-primary btn-block mt-4"
+                style={{
+                  color: theme == "dark" ? light : dark,
+                  backgroundColor: theme == "dark" ? navyBlue : light,
+                }}
+              />
             </form>
           </div>
         </div>
@@ -137,6 +207,7 @@ function AddProjectTask(props) {
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  userInterface: state.userInterface,
 });
 
 export default connect(mapStateToProps, { addProjectTask })(AddProjectTask);

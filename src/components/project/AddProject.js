@@ -3,6 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectActions";
 import classnames from "classnames";
+import styled from "styled-components";
+import {
+  dark,
+  light,
+  darkContent,
+  lightContent,
+  darkHighlightColor,
+  navyBlue,
+} from "../../constants/colors";
 
 function AddProject(props) {
   const [projectName, setProjectName] = useState("");
@@ -11,12 +20,17 @@ function AddProject(props) {
   const [start_date, setStartDate] = useState("");
   const [end_date, setEndDate] = useState("");
   const [errors, setErrors] = useState("");
+  const [theme, setTheme] = useState("");
 
   useEffect(() => {
     if (props.errors) {
       setErrors(props.errors);
     }
   }, [props.errors]);
+
+  useEffect(() => {
+    setTheme(props.userInterface.color);
+  }, [props.userInterface]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -34,16 +48,32 @@ function AddProject(props) {
   };
 
   return (
-    <div>
-      <div className="project">
+    <div
+      style={{
+        minHeight: "90vh",
+        background: theme == "dark" ? dark : lightContent,
+      }}
+    >
+      <div>
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h5 className="display-4 text-center">Create Project form</h5>
+              <h5
+                className="display-4 text-center"
+                style={{
+                  color: theme == "dark" ? light : dark,
+                }}
+              >
+                Create Project form
+              </h5>
               <hr />
               <form onSubmit={onSubmit}>
-                <div className="form-group">
+                <div className="form-group" style={{ marginBottom: 5 }}>
                   <input
+                    style={{
+                      color: theme == "dark" ? light : dark,
+                      backgroundColor: theme == "dark" ? navyBlue : light,
+                    }}
                     type="text"
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.projectName,
@@ -59,6 +89,10 @@ function AddProject(props) {
                 </div>
                 <div className="form-group">
                   <input
+                    style={{
+                      color: theme == "dark" ? light : dark,
+                      backgroundColor: theme == "dark" ? navyBlue : light,
+                    }}
                     type="text"
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.projectIdentifier,
@@ -79,6 +113,10 @@ function AddProject(props) {
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.description,
                     })}
+                    style={{
+                      color: theme == "dark" ? light : dark,
+                      backgroundColor: theme == "dark" ? navyBlue : light,
+                    }}
                     placeholder="Project Description"
                     name="description"
                     value={description}
@@ -88,9 +126,19 @@ function AddProject(props) {
                     <div className="invalid-feedback">{errors.description}</div>
                   )}
                 </div>
-                <h6>Start Date</h6>
+                <h6
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                  }}
+                >
+                  Start Date
+                </h6>
                 <div className="form-group">
                   <input
+                    style={{
+                      color: theme == "dark" ? light : dark,
+                      backgroundColor: theme == "dark" ? navyBlue : light,
+                    }}
                     type="date"
                     className="form-control form-control-lg"
                     name="start_date"
@@ -98,9 +146,19 @@ function AddProject(props) {
                     onChange={(e) => setStartDate(e.target.value)}
                   />
                 </div>
-                <h6>Estimated End Date</h6>
+                <h6
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                  }}
+                >
+                  Estimated End Date
+                </h6>
                 <div className="form-group">
                   <input
+                    style={{
+                      color: theme == "dark" ? light : dark,
+                      backgroundColor: theme == "dark" ? navyBlue : light,
+                    }}
                     type="date"
                     className="form-control form-control-lg"
                     name="end_date"
@@ -110,6 +168,10 @@ function AddProject(props) {
                 </div>
 
                 <input
+                  style={{
+                    color: theme == "dark" ? light : dark,
+                    backgroundColor: theme == "dark" ? navyBlue : light,
+                  }}
                   type="submit"
                   className="btn btn-primary btn-block mt-4"
                 />
@@ -129,6 +191,7 @@ function AddProject(props) {
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  userInterface: state.userInterface,
 });
 
 export default connect(mapStateToProps, { createProject })(AddProject);
