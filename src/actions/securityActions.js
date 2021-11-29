@@ -5,10 +5,16 @@ import jwt_decode from "jwt-decode";
 
 export const createNewUser = (newUser, history) => async (dispatch) => {
   try {
+<<<<<<< HEAD
     await axios.post(
       "https://still-springs-98597.herokuapp.com/api/users/register",
       newUser
     );
+=======
+    await axios.post("http://52.149.156.107:8383/api/users/register", newUser, {
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+    });
+>>>>>>> 99d2e745e7180edf099b0ad6422afff5216267d2
     history.push("/login");
     dispatch({
       type: GET_ERRORS,
@@ -27,8 +33,16 @@ export const login = (LoginRequest) => async (dispatch) => {
     // post => Login Request
     console.log("im trying");
     const res = await axios.post(
+<<<<<<< HEAD
       "https://still-springs-98597.herokuapp.com/api/users/login",
       LoginRequest
+=======
+      "http://52.149.156.107:8383/api/users/login",
+      LoginRequest,
+      {
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+      }
+>>>>>>> 99d2e745e7180edf099b0ad6422afff5216267d2
     );
 
     // extract token from res.data
