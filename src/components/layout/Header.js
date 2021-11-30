@@ -48,6 +48,9 @@ const SidebarTitleContainer = styled.div({
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
+  "&:hover": {
+    cursor: "pointer",
+  },
 });
 
 const SidebarElementContainer = styled.div({
@@ -80,6 +83,7 @@ const NavbarContainer = styled.nav({
 const FlexContainer = styled.div({
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
   // "@media(max-width: 788px)": {
   //   display: "none",
   // },
@@ -119,6 +123,34 @@ function Header(props) {
 
   const userIsAuthenticated = (
     <FlexContainer style={{ marginRight: 20 }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "15px",
+        }}
+      >
+        {theme == "dark" && (
+          <p
+            style={{
+              color: theme == "dark" ? light : dark,
+            }}
+          >
+            Switch to light mode
+          </p>
+        )}
+
+        {theme == "light" && (
+          <p
+            style={{
+              color: theme == "dark" ? light : dark,
+            }}
+          >
+            Switch to dark mode
+          </p>
+        )}
+      </div>
       <Switch
         checked={checked}
         onChange={() => updateTheme()}
@@ -150,6 +182,18 @@ function Header(props) {
         onHandleColor="#ffffff"
         onColor="#888"
       /> */}
+      <div style={{ display: "flex" }}>
+        <div size={25} style={{ color: theme == "dark" ? light : dark }}>
+          <Link className="nav-link" to="/login">
+            Login
+          </Link>
+        </div>
+        <div size={25} style={{ color: theme == "dark" ? light : dark }}>
+          <Link className="nav-link" to="/register">
+            Register
+          </Link>
+        </div>
+      </div>
       <HamburgerIconContainer>
         <MdDehaze size={25} style={{ color: theme == "dark" ? light : dark }} />
       </HamburgerIconContainer>
@@ -180,7 +224,9 @@ function Header(props) {
           background: theme == "dark" ? navyBlue : light,
         }}
       >
-        <h3 style={{ textAlign: "center" }}> PPMT</h3>
+        <Link className="nav-link" to="/dashboard">
+          <h3 style={{ textAlign: "center" }}> PPMT</h3>
+        </Link>
       </SidebarTitleContainer>
       <SidebarElementContainer>
         <Link

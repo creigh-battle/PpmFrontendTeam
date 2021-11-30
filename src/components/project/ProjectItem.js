@@ -48,7 +48,7 @@ function ProjectItem(props) {
             <h3>{props.project.projectName}</h3>
             <p>{props.project.projectDescription}</p>
           </div>
-          <div className="col-md-4 d-none d-lg-block">
+          <div className="col-md-4">
             <ul className="list-group">
               <Link to={`/projectBoard/${props.project.projectIdentifier}`}>
                 <li
