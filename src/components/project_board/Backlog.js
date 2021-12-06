@@ -26,23 +26,24 @@ export default function Backlog(props) {
 
   //const [board, setBoard] = useState([]);
 
-  const [{isOver}, drop] = useDrop(() => ({
-    accept: "task",
-    drop: (item) => addTaskToList(item.taskId),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver()
-    })
-  }))
+//   const [{isOver}, drop] = useDrop(() => ({
+//     accept: "task",
+//     drop: (item) => addTaskToList(item.taskId),
+//     collect: (monitor) => ({
+//       isOver: !!monitor.isOver()
+//     })
+//   }))
 
-  const addTaskToList = (taskId) => {
-console.log(taskId);
-  }
+//   const addTaskToList = (taskId) => {
+// console.log(taskId);
+//   }
 
   return (
-<DndProvider backend={HTML5Backend}>
+
+
     <div className="container">
       <div className="row">
-        <div className="col-md-4" ref={drop} >
+        <div className="col-md-4"  >
           <div className="card text-center mb-2">
             <div className="card-header bg-secondary text-white">
               <h3>TO DO</h3>
@@ -68,6 +69,7 @@ console.log(taskId);
         </div>
       </div>
     </div>
-    </DndProvider>
+  
+
   );
 }

@@ -11,3 +11,4 @@ export const DELETE_PROJECT_TASK = "DELETE_PROJECT_TASK";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
 export const SET_THEME = "SET_THEME";
+export const SET_DRAWER = "SET_DRAWER";

@@ -38,20 +38,20 @@ function ProjectTask(props) {
     props.deleteProjectTask(backlog_id, pt_id);
   };
 
-  const [{isDragging}, drag] = useDrag(() => ({
-    type: "task",
-    item:{taskId: props.project_task.projectSequence},
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging
-    })
-  }));
+  // const [{isDragging}, drag] = useDrag(() => ({
+  //   type: "task",
+  //   item:{taskId: props.project_task.projectSequence},
+  //   collect: (monitor) => ({
+  //     isDragging: !!monitor.isDragging
+  //   })
+  // }));
 
   return (
     <div
       className="card mb-1"
       style={{ background: theme == "dark" ? navyBlue : lightContent }}
-      ref = {drag}
-      style={{border: isDragging ? "5px solid pink" : "0px"}}
+      // ref = {drag}
+      // style={{border: isDragging ? "5px solid pink" : "0px"}}
     >
       <div className={`card-header text-primary ${priorityClass}`}>
         ID: {project_task.projectSequence} -- Priority: {priorityString}

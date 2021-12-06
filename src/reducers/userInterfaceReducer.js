@@ -1,7 +1,8 @@
-import { SET_THEME } from "../actions/types";
+import {SET_THEME } from "../actions/types";
 
 const initialState = {
   color: "light",
+
 };
 
 export default function (state = initialState, action) {
@@ -16,3 +17,7 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+
+
+

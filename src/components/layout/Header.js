@@ -2,7 +2,7 @@ import React, { Children, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/securityActions";
-import { changeTheme } from "../../actions/userInterfaceActions";
+import { changeTheme, openDrawer } from "../../actions/userInterfaceActions";
 import styled from "styled-components";
 import { format } from "date-fns";
 import { MdLockOutline, MdLockOpen, MdDehaze } from "react-icons/md";
@@ -97,14 +97,45 @@ const DateContainer = styled.div({
   marginLeft: "20px",
 });
 
+const DrawerContainer = styled.div({
+  height: '100vh',
+  width: '35%',
+  background: 'pink',
+  position: 'fixed',
+  top: 0,
+  right: 0,
+});
+
+const DrawerHeader = styled.div({
+  display: 'flex',
+  height: "10vh",
+  justifyContent: 'flex-end',
+  alignItems: 'center'
+})
+
+const DrawerElementsContainer = styled.div({
+  height: '100%',
+  background: 'black',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+})
+
+const DrawerElement = styled.div({
+  marginTop: '10px'
+  
+})
+
 function Header(props) {
   const { validToken, user } = props.security;
   const [theme, setTheme] = useState("");
   const [checked, setChecked] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setTheme(props.userInterface.color);
   }, [props.userInterface]);
+
 
   const logout = () => {
     props.logout();
@@ -120,6 +151,11 @@ function Header(props) {
 
     setChecked(!checked);
   };
+
+  const isOpen = () => {
+    setOpen(!open)
+    console.log(open)
+  }
 
   const userIsAuthenticated = (
     <FlexContainer style={{ marginRight: 20 }}>
@@ -164,7 +200,7 @@ function Header(props) {
         offColor={lightHighlightColor}
       />
       <HamburgerIconContainer>
-        <MdDehaze size={25} color="white" />
+        <MdDehaze size={25} color={theme == "dark" ? light : dark} onClick={isOpen}/>
       </HamburgerIconContainer>
     </FlexContainer>
   );
@@ -194,9 +230,9 @@ function Header(props) {
           </Link>
         </div>
       </div>
-      <HamburgerIconContainer>
+      {/* <HamburgerIconContainer onClick={isOpen}>
         <MdDehaze size={25} style={{ color: theme == "dark" ? light : dark }} />
-      </HamburgerIconContainer>
+      </HamburgerIconContainer> */}
     </FlexContainer>
   );
 
@@ -302,8 +338,27 @@ function Header(props) {
           </DateContainer>
           {headerLinks}
         </NavbarContainer>
-
         {props.children}
+        {open && (
+          <DrawerContainer>
+            <DrawerHeader style={{background: theme == "dark" ? 'gray' : navyBlue }}><MdDehaze size={25} color={theme == "dark" ? light : dark} onClick={isOpen}/></DrawerHeader>
+           <DrawerElementsContainer style={{background: theme == "dark" ? darkContent : lightContent }}>
+            <DrawerElement className="nav-link"><Link to="/dashboard" onClick={() => setOpen(false)}>Dashboard</Link></DrawerElement>
+            <DrawerElement className="nav-link">  <MdLockOutline />
+        <Link
+          to="/logout"
+          style={{
+       
+            // color: theme == "dark" ? lightText : darkText,
+          }}
+          onClick={logout}
+        >
+          Logout
+        </Link></DrawerElement>
+          </DrawerElementsContainer>
+          </DrawerContainer>
+        )}
+     
       </ChildrenContainer>
     </Container>
   );
@@ -312,6 +367,7 @@ function Header(props) {
 const mapStateToProps = (state) => ({
   security: state.security,
   userInterface: state.userInterface,
+  drawer: state.drawer.active
 });
 
-export default connect(mapStateToProps, { logout, changeTheme })(Header);
+export default connect(mapStateToProps, { logout, changeTheme, openDrawer })(Header);
