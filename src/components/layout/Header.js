@@ -158,35 +158,25 @@ function Header(props) {
   }
 
   const userIsAuthenticated = (
-    <FlexContainer style={{ marginRight: 20 }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "15px",
-        }}
-      >
+    <FlexContainer style={{ marginRight: 20,}}>
+  
         {theme == "dark" && (
-          <p
-            style={{
-              color: theme == "dark" ? light : dark,
-            }}
-          >
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px'}}>
+       
             Switch to light mode
-          </p>
+    
+          </div>
+        
         )}
 
         {theme == "light" && (
-          <p
-            style={{
-              color: theme == "dark" ? light : dark,
-            }}
-          >
-            Switch to dark mode
-          </p>
+             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px'}}>
+       
+             Switch to dark mode
+     
+           </div>
         )}
-      </div>
+     
       <Switch
         checked={checked}
         onChange={() => updateTheme()}
