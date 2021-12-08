@@ -46,7 +46,7 @@ function ProjectItem(props) {
           </div>
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{props.project.projectName}</h3>
-            <p>{props.project.projectDescription}</p>
+            <p>{props.project.description}</p>
           </div>
           <div className="col-md-4">
             <ul className="list-group">
