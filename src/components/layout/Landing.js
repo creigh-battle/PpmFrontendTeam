@@ -19,7 +19,7 @@ function Landing(props) {
                 Personal Project Management Tool
               </h1>
               <p className="lead">
-                Create your account to join active projects or start your own
+                Welcome to our PPMT demo!!!
               </p>
               <hr />
               <Link className="btn btn-lg btn-primary mr-2" to="/register">
